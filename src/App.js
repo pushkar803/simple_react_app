@@ -1,24 +1,62 @@
-import logo from './logo.svg';
 import './App.css';
+import List from "./components/List"
+import EmployeeList from "./components/EmployeeList"
+import Translation from "./components/Translation"
+import Artical from "./components/Artical"
+import Count from "./components/Count"
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from './Layout';
+
 
 function App() {
+
+  const EMPLOYEES = [
+    {
+      name: "Parker Green",
+    },
+    {
+      name: "Jordan Richards",
+    },
+    {
+      name: "Alex Stevens",
+    },
+    {
+      name: "Avery Scott",
+    },
+    {
+      name: "Riley Miller",
+    },
+    {
+      name: "Charlie Green",
+    },
+  ];
+
+  const TRANSLATIONS = new Map([
+    ['ball', 'pelota'],
+    ['house', 'casa'],
+    ['dog', 'perro'],
+    ['dogs', 'perros'],
+    ['milk', 'leche'],
+    ['orange', 'naranja'],
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Count />} />
+            <Route path="ajaxExample" element={<List />} />
+            <Route path="employeeList" element={<EmployeeList emp={EMPLOYEES} />} />
+            <Route path="translation" element={<Translation translation={TRANSLATIONS} />} />
+            <Route path="artical" element={<Artical />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+
+    </>
   );
 }
 
